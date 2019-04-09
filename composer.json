@@ -1,0 +1,22 @@
+{
+    "name": "rudenko-programmer/testpackage",
+    "description": "Get Response Laravel package",
+    "authors": [
+        {
+            "name": "Maksim Rudenko",
+            "email": "rudenko.programmer@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RudenkoProgrammer\\GetResponseLaravel\\GetResponseServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev-master",
+    "require": {},
+    "autoload": {
+        "psr-4": {"RudenkoProgrammer\\GetResponseLaravel\\": "src/"}
+    }
+}
