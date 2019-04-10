@@ -15,7 +15,9 @@
         }
     },
     "minimum-stability": "dev-master",
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "6.*"
+    },
     "autoload": {
         "psr-4": {"RudenkoProgrammer\\GetResponseLaravel\\": "src/"}
     }

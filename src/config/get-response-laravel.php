@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'key' => 'key example'
+	'key' => env('RP_GET_RESPONSE_KEY', null)
 ];

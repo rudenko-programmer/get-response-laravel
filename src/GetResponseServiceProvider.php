@@ -14,8 +14,13 @@ class GetResponseServiceProvider extends ServiceProvider
 	 */
     public function register()
     {
+    	/* Plugin configuration file */
 	    $configPath = __DIR__ . '/config/get-response-laravel.php';
 	    $this->mergeConfigFrom($configPath, 'get-response-laravel');
+
+	    $this->app->singleton('GetResponseHttpClient', function (){
+		    return new GetResponseHttpClient();
+	    });
     }
 
     /**
