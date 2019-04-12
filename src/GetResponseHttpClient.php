@@ -21,6 +21,7 @@ class GetResponseHttpClient {
 	private $client = null;
 	private $base_url = "https://api.getresponse.com/v3/";
 	private $api_key;
+	private $headers;
 
 	/**
 	 * GetResponseHttpClient constructor.
@@ -30,23 +31,62 @@ class GetResponseHttpClient {
 			'base_uri' => $this->base_url
 		]);
 		$this->api_key = config('get-response-laravel.key');
+		$this->headers = [
+			"X-Auth-Token" => "api-key ".$this->api_key
+		];
 	}
 
 	/**
 	 * @param string $uri
 	 * @param array $form_params
+	 * @param array $additional_params
 	 *
-	 * @return string
+	 * @return \Exception|\GuzzleHttp\Exception\ClientException|\Psr\Http\Message\ResponseInterface
 	 */
-	public function get(string $uri, array $form_params = []){
+	public function get(string $uri, array $form_params = [], array $additional_params = []){
 		try{
-			$response =  $this->client->get($uri, [
-				"form_params" => $form_params,
-				"headers" => [
-					"X-Auth-Token" => "api-key ".$this->api_key
-				]
-			]);
-			return $response->getBody()->getContents();
+			$params = [
+				"headers" => $this->headers
+			];
+
+			if(count($form_params)){
+				$params["form_params"] = $form_params;
+			}
+
+			if(count($additional_params)){
+				$params = array_merge($params, $additional_params);
+			}
+
+			$response =  $this->client->get($uri, $params);
+			return $response;
+		}catch (ClientException $exception){
+			return $exception;
+		}
+	}
+
+	/**
+	 * @param string $uri
+	 * @param array $form_params
+	 * @param array $additional_params
+	 *
+	 * @return \Exception|\GuzzleHttp\Exception\ClientException|\Psr\Http\Message\ResponseInterface
+	 */
+	public function post(string $uri, array $form_params = [], array $additional_params = []){
+		try{
+			$params = [
+				"headers" => $this->headers
+			];
+
+			if(count($form_params)){
+				$params["form_params"] = $form_params;
+			}
+
+			if(count($additional_params)){
+				$params = array_merge($params, $additional_params);
+			}
+
+			$response =  $this->client->post($uri, $params);
+			return $response;
 		}catch (ClientException $exception){
 			return $exception;
 		}
