@@ -49,18 +49,18 @@ class GetResponseHttpClient {
 				"headers" => $this->headers
 			];
 
-			if(count($form_params)){
+			if(count($form_params) > 0){
 				$params["form_params"] = $form_params;
 			}
 
-			if(count($additional_params)){
+			if(count($additional_params) > 0){
 				$params = array_merge($params, $additional_params);
 			}
 
 			$response =  $this->client->get($uri, $params);
 			return $response;
 		}catch (ClientException $exception){
-			return $exception;
+			return new GetResponseClientException($exception);
 		}
 	}
 
@@ -77,18 +77,18 @@ class GetResponseHttpClient {
 				"headers" => $this->headers
 			];
 
-			if(count($form_params)){
+			if(count($form_params) > 0){
 				$params["form_params"] = $form_params;
 			}
 
-			if(count($additional_params)){
+			if(count($additional_params) > 0){
 				$params = array_merge($params, $additional_params);
 			}
 
 			$response =  $this->client->post($uri, $params);
 			return $response;
 		}catch (ClientException $exception){
-			return $exception;
+			return new GetResponseClientException($exception);
 		}
 	}
 }

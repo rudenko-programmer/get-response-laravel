@@ -20,9 +20,9 @@ class GetResponseContacts {
 	}
 
 
-	public static function addContact( array $form_params = [], array $json_params = [] ) {
+	public static function addContact( array $form_params = []) {
 		$api_method = 'contacts/';
 		$client = new GetResponseHttpClient();
-		return $client->post($api_method, $form_params, $json_params);
+		return $client->post($api_method, $form_params);
 	}
 }
