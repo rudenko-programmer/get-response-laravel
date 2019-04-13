@@ -7,6 +7,7 @@
 
 namespace RudenkoProgrammer\GetResponseLaravel;
 
+use Exception;
 
 class GetResponseContacts {
 
@@ -20,9 +21,18 @@ class GetResponseContacts {
 	}
 
 
+	/**
+	 * @param array $form_params
+	 *
+	 * @return \RudenkoProgrammer\GetResponseLaravel\GetResponseResponse
+	 */
 	public static function addContact( array $form_params = []) {
 		$api_method = 'contacts/';
 		$client = new GetResponseHttpClient();
-		return $client->post($api_method, $form_params);
+		$response = $client->post($api_method, $form_params);
+		if ($response instanceof Exception){
+			return new GetResponseResponse(false, $response);
+		}
+		return new GetResponseResponse(true, $response);
 	}
 }
