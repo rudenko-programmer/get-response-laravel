@@ -1,11 +1,5 @@
 ## Laravel 5 get response package
 
-
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Total Downloads][ico-downloads]][link-downloads]
-
 Require this package with composer using the following command:
 
 ```bash
